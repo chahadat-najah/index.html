@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>شهادتي المدرسية</title>
+  <!-- إضافة خط جميل من Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+  <!-- إضافة أيقونات Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Tajawal', sans-serif;
+    }
+
+    body {
+      margin: 0;
+      background-color: #ffe6f0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .wrapper {
+      width: 100%;
+      max-width: 1300px;
+      margin-top: 20px;
+      background-color: #ffffff;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      overflow: hidden;
+      display: flex;
+      flex-direction: row;
+      transition: transform 0.3s ease;
+    }
+    .wrapper:hover {
+      transform: translateY(-5px);
+    }
+
+    /* القائمة الجانبية المحسنة */
+    aside {
+      width: 280px;
+      background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+      padding: 25px;
+      text-align: right;
+      position: relative;
+      overflow: hidden;
+    }
+    aside::before {
+      content: "";
+      position: absolute;
+      top: -50px;
+      right: -50px;
+      width: 100px;
+      height: 100px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 50%;
+    }
+
+    .logo {
+      font-size: 2em;
+      font-weight: bold;
+      color: #fff;
+      margin-bottom: 10px;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .logo i {
+      font-size: 1.5em;
+    }
+
+    .subtitle {
+      font-size: 1em;
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 30px;
+      position: relative;
+      padding-bottom: 15px;
+    }
+    .subtitle::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 50px;
+      height: 2px;
+      background: rgba(255,255,255,0.5);
+    }
+
+    aside ul {
+      list-style: none;
+      padding: 0;
+      text-align: right;
+    }
+
+    aside ul li {
+      margin: 12px 0;
+      position: relative;
+    }
+
+    aside ul li a {
+      display: flex;
+      align-items: center;
+      padding: 12px 15px;
+      background: rgba(255,255,255,0.2);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    aside ul li a i {
+      margin-left: 10px;
+      font-size: 1.2em;
+    }
+    aside ul li a:hover {
+      background: rgba(255,255,255,0.3);
+      transform: translateX(-5px);
+    }
+
+    /* زر إنشاء شهادة جديد */
+    .create-certificate {
+      display: block;
+      margin: 25px 0;
+      padding: 12px;
+      background: #fff;
+      color: #ff6b88;
+      text-align: center;
+      border-radius: 8px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: all 0.3s;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    }
+    .create-certificate:hover {
+      background: #ff6b88;
+      color: #fff;
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(255,107,136,0.3);
+    }
+    .create-certificate i {
+      margin-left: 8px;
+    }
+
+    /* المحتوى الرئيسي المحسن */
+    .main-content {
+      flex-grow: 1;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* شريط التنقل العلوي */
+    nav {
+      display: flex;
+      justify-content: space-around;
+      background: linear-gradient(to right, #ff758c, #ff7eb3);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    nav a {
+      flex: 1;
+      text-align: center;
+      padding: 18px 0;
+      text-decoration: none;
+      color: #fff;
+      font-weight: 500;
+      transition: all 0.3s;
+      position: relative;
+    }
+    nav a:hover {
+      background: rgba(255,255,255,0.2);
+    }
+    nav a.active {
+      font-weight: bold;
+    }
+    nav a.active::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      right: 25%;
+      width: 50%;
+      height: 3px;
+      background: #fff;
+      border-radius: 3px;
+    }
+
+    /* محتوى الصفحة */
+    .content {
+      padding: 25px;
+      background: #f9f9f9;
+      min-height: calc(100vh - 200px);
+    }
+
+    .welcome-section {
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      padding: 25px;
+      border-radius: 10px;
+      margin-bottom: 30px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+      position: relative;
+      overflow: hidden;
+    }
+    .welcome-section::before {
+      content: "";
+      position: absolute;
+      top: -20px;
+      right: -20px;
+      width: 100px;
+      height: 100px;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="%23ff758c" opacity="0.1"><path d="M30,10 Q50,5 70,10 Q95,15 90,40 Q85,70 50,90 Q15,70 10,40 Q5,15 30,10"/></svg>') no-repeat;
+      background-size: contain;
+    }
+
+    .welcome-section h2 {
+      color: #333;
+      margin-top: 0;
+      font-size: 1.8em;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .welcome-section h2 i {
+      color: #ff758c;
+    }
+
+    .welcome-section p {
+      color: #555;
+      line-height: 1.6;
+    }
+
+    /* شبكة التصاميم */
+    .designs-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .designs-header h3 {
+      color: #333;
+      font-size: 1.4em;
+      margin: 0;
+    }
+    .view-all {
+      color: #ff758c;
+      text-decoration: none;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .image-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 25px;
+    }
+
+    .image-item {
+      background-color: #fff;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    .image-item:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    }
+    .image-item .badge {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      background: #ff758c;
+      color: #fff;
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 0.8em;
+      font-weight: bold;
+    }
+    .image-item img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .image-item:hover img {
+      transform: scale(1.05);
+    }
+    .image-item .info {
+      padding: 15px;
+    }
+    .image-item h4 {
+      margin: 0 0 5px 0;
+      color: #333;
+    }
+    .image-item p {
+      margin: 0;
+      color: #777;
+      font-size: 0.9em;
+    }
+    .image-item .actions {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 15px;
+      padding-top: 10px;
+      border-top: 1px solid #eee;
+    }
+    .image-item .actions a {
+      color: #ff758c;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.9em;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .image-item .actions a:hover {
+      color: #ff4757;
+    }
+
+    /* إحصائيات سريعة */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+      margin: 30px 0;
+    }
+    .stat-card {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+      text-align: center;
+      transition: all 0.3s;
+    }
+    .stat-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    .stat-card i {
+      font-size: 2em;
+      color: #ff758c;
+      margin-bottom: 10px;
+    }
+    .stat-card .number {
+      font-size: 1.8em;
+      font-weight: bold;
+      color: #333;
+      margin: 5px 0;
+    }
+    .stat-card .label {
+      color: #777;
+      font-size: 0.9em;
+    }
+
+    /* تذييل الصفحة */
+    footer {
+      text-align: center;
+      background: linear-gradient(to right, #ff758c, #ff7eb3);
+      padding: 20px;
+      color: #fff;
+      font-size: 0.9em;
+      margin-top: auto;
+    }
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin: 15px 0;
+    }
+    .social-links a {
+      color: #fff;
+      background: rgba(255,255,255,0.2);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+    }
+    .social-links a:hover {
+      background: rgba(255,255,255,0.3);
+      transform: translateY(-3px);
+    }
+
+    /* تأثيرات للهواتف */
+    @media (max-width: 900px) {
+      .wrapper {
+        flex-direction: column;
+      }
+      aside {
+        width: 100%;
+      }
+      .stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      nav {
+        flex-wrap: wrap;
+      }
+      nav a {
+        flex: 1 0 50%;
+        padding: 12px 0;
+        font-size: 0.9em;
+      }
+      .stats {
+        grid-template-columns: 1fr;
+      }
+      .image-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* تأثيرات حركية */
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0px); }
+    }
+    .floating {
+      animation: float 3s ease-in-out infinite;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="wrapper">
+
+    <!-- القائمة الجانبية على اليسار -->
+    <aside>
+      <div class="logo">
+        <i class="fas fa-certificate floating"></i>
+        <span>شهادتي</span>
+      </div>
+      <div class="subtitle">نظام إدارة الشهادات المدرسية</div>
+
+      <a href="#" class="create-certificate">
+        <i class="fas fa-plus-circle"></i>
+        إنشاء شهادة جديدة
+      </a>
+
+      <ul>
+        <li><a href="#"><i class="fas fa-home"></i> الرئيسية</a></li>
+        <li><a href="#"><i class="fas fa-user-graduate"></i> شهادات التلاميذ</a></li>
+        <li><a href="#"><i class="fas fa-chalkboard-teacher"></i> شهادات الأساتذة</a></li>
+        <li><a href="#"><i class="fas fa-trophy"></i> شهادات التكريم</a></li>
+        <li><a href="#"><i class="fas fa-folder"></i> المحفوظات</a></li>
+        <li><a href="#"><i class="fas fa-cog"></i> الإعدادات</a></li>
+      </ul>
+    </aside>
+
+    <!-- المحتوى الرئيسي -->
+    <div class="main-content">
+      <nav>
+        <a href="#" class="active">الرئيسية</a>
+        <a href="#">إنشاء شهادة</a>
+        <a href="#">التصاميم</a>
+        <a href="#">المحفوظات</a>
+        <a href="#">حول</a>
+        <a href="#">اتصل بنا</a>
+      </nav>
+
+      <div class="content">
+        <div class="welcome-section">
+          <h2><i class="fas fa-graduation-cap"></i> مرحبًا بك في نظام شهادتي!</h2>
+          <p>منصة متكاملة لإنشاء وإدارة الشهادات المدرسية باحترافية وسهولة. يمكنك تصميم شهادات تخرج جميلة للتلاميذ والمعلمين مع خيارات تخصيص متعددة.</p>
+        </div>
+
+        <!-- إحصائيات سريعة -->
+        <div class="stats">
+          <div class="stat-card">
+            <i class="fas fa-certificate"></i>
+            <div class="number">1,248</div>
+            <div class="label">شهادة منشأة</div>
+          </div>
+          <div class="stat-card">
+            <i class="fas fa-users"></i>
+            <div class="number">856</div>
+            <div class="label">تلميذ</div>
+          </div>
+          <div class="stat-card">
+            <i class="fas fa-chalkboard-teacher"></i>
+            <div class="number">42</div>
+            <div class="label">أستاذ</div>
+          </div>
+          <div class="stat-card">
+            <i class="fas fa-trophy"></i>
+            <div class="number">150</div>
+            <div class="label">شهادة تكريم</div>
+          </div>
+        </div>
+
+        <!-- أحدث التصاميم -->
+        <div class="designs-header">
+          <h3>أحدث تصاميم الشهادات</h3>
+          <a href="#" class="view-all">عرض الكل <i class="fas fa-arrow-left"></i></a>
+        </div>
+
+        <div class="image-grid">
+          <div class="image-item">
+            <span class="badge">جديد</span>
+            <img src="https://images.unsplash.com/photo-1571260898933-d1a1f675cf6f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="تصميم شهادة">
+            <div class="info">
+              <h4>تصميم التخرج الذهبي</h4>
+              <p>تصميم فاخر لشهادات التخرج مع إطارات ذهبية</p>
+              <div class="actions">
+                <a href="#"><i class="fas fa-eye"></i> معاينة</a>
+                <a href="#"><i class="fas fa-download"></i> تحميل</a>
+              </div>
+            </div>
+          </div>
+          <div class="image-item">
+            <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="تصميم شهادة">
+            <div class="info">
+              <h4>شهادة التفوق العلمي</h4>
+              <p>تصميم أنيق لشهادات التفوق والتميز</p>
+              <div class="actions">
+                <a href="#"><i class="fas fa-eye"></i> معاينة</a>
+                <a href="#"><i class="fas fa-download"></i> تحميل</a>
+              </div>
+            </div>
+          </div>
+          <div class="image-item">
+            <span class="badge">الأكثر استخدامًا</span>
+            <img src="https://images.unsplash.com/photo-1541178735493-479c1a27ed24?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="تصميم شهادة">
+            <div class="info">
+              <h4>شهادة نهاية السنة</h4>
+              <p>تصميم رسمي مناسب لجميع المراحل</p>
+              <div class="actions">
+                <a href="#"><i class="fas fa-eye"></i> معاينة</a>
+                <a href="#"><i class="fas fa-download"></i> تحميل</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+        &copy; 2025 - نظام شهادتي المدرسية - جميع الحقوق محفوظة
+        <div style="margin-top: 10px; font-size: 0.8em;">
+          نسخة 2.1.0 | آخر تحديث: اليوم
+        </div>
+      </footer>
+    </div>
+  </div>
+
+</body>
+</html>
